@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,7 +15,7 @@ public class Duke {
         //level1();
         //level2ArrayList();
         //level2ArrayofString();
-        level3();
+        level3A_Classes();
     }
 
     static void level1(){
@@ -126,6 +128,46 @@ public class Duke {
                 }
             }
 
+        }
+
+        System.out.println("Bye, Hope to see you again soon!");
+
+    }
+
+    static void level3A_Classes(){
+
+        System.out.println("What can I do for you?");
+
+        Task[] list = new Task[100];
+
+        Scanner input = new Scanner(System.in);
+        String userInput;
+        int k = 0;
+
+        while(true){
+            userInput = input.nextLine();
+
+            if(userInput.equals("list")){
+                for(int i = 0; i < k; i++){
+                    System.out.println((i+1) + ". " + list[i].getStatusIcon() + " " + list[i].description);
+                }
+            }
+            else if(userInput.equals("bye")){
+                break;
+            }
+            else{
+                String[] temp = userInput.split(" ", 2);
+                if(temp[0].equals("done")){
+                    int index = Integer.parseInt(temp[1]) -1;
+                    list[index].isDone = true;
+//                    System.out.println("Nice! I've marked this task as done:");
+//                    System.out.println("  " + list[index].getStatusIcon() + " " + list[index].description);
+                }
+                else{
+                    list[k++].description = userInput;
+//                    System.out.println(list[k].getStatusIcon() + " " + list[k].description);
+                }
+            }
         }
 
         System.out.println("Bye, Hope to see you again soon!");
