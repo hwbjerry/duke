@@ -149,7 +149,7 @@ public class Duke {
 
             if(userInput.equals("list")){
                 for(int i = 0; i < k; i++){
-                    System.out.println((i+1) + ". " + list[i].getStatusIcon() + " " + list[i].description);
+                    //System.out.println((i+1) + ". " + list[i].getStatusIcon() + " " + list[i].getDescription());
                 }
             }
             else if(userInput.equals("bye")){
@@ -159,12 +159,12 @@ public class Duke {
                 String[] temp = userInput.split(" ", 2);
                 if(temp[0].equals("done")){
                     int index = Integer.parseInt(temp[1]) -1;
-                    list[index].isDone = true;
+                    list[index].updateFlag(true);
 //                    System.out.println("Nice! I've marked this task as done:");
 //                    System.out.println("  " + list[index].getStatusIcon() + " " + list[index].description);
                 }
                 else{
-                    list[k++].description = userInput;
+                    list[k++].updateTask(userInput);
 //                    System.out.println(list[k].getStatusIcon() + " " + list[k].description);
                 }
             }
