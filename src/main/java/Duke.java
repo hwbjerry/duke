@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class Duke {
 
 
@@ -138,18 +140,17 @@ public class Duke {
 
         System.out.println("What can I do for you?");
 
-        Task[] list = new Task[100];
-
         Scanner input = new Scanner(System.in);
         String userInput;
-        int k = 0;
+
+        ArrayList<Task> taskList = new ArrayList<Task>();
 
         while(true){
             userInput = input.nextLine();
 
             if(userInput.equals("list")){
-                for(int i = 0; i < k; i++){
-                    //System.out.println((i+1) + ". " + list[i].getStatusIcon() + " " + list[i].getDescription());
+                for(int i = 0; i < taskList.size(); i++){
+                    System.out.println((i+1) + ".[" + taskList.get(i).getStatusIcon()+ "] " + taskList.get(i).getDescription());
                 }
             }
             else if(userInput.equals("bye")){
@@ -159,13 +160,14 @@ public class Duke {
                 String[] temp = userInput.split(" ", 2);
                 if(temp[0].equals("done")){
                     int index = Integer.parseInt(temp[1]) -1;
-                    list[index].updateFlag(true);
-//                    System.out.println("Nice! I've marked this task as done:");
-//                    System.out.println("  " + list[index].getStatusIcon() + " " + list[index].description);
+                    taskList.get(index).updateFlag();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("[" + taskList.get(index).getStatusIcon()+ "] " + taskList.get(index).getDescription());
                 }
                 else{
-                    list[k++].updateTask(userInput);
-//                    System.out.println(list[k].getStatusIcon() + " " + list[k].description);
+                    Task temporary = new Task(userInput);
+                    taskList.add(temporary);
+                    System.out.println("added: " + userInput);
                 }
             }
         }
