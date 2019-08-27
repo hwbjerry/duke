@@ -11,35 +11,49 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        level2ArrayList();
+        level3A_Classes();
     }
 
 
-    static void level2ArrayList(){
+    static void level3A_Classes(){
+
         System.out.println("What can I do for you?");
 
         Scanner input = new Scanner(System.in);
-
         String userInput;
-        ArrayList list = new ArrayList();
+
+        ArrayList<Task> taskList = new ArrayList<Task>();
 
         while(true){
             userInput = input.nextLine();
+
             if(userInput.equals("list")){
-                for(int i = 0; i < list.size(); i++){
-                    System.out.println((i+1) + "." + list.get(i));
+                for(int i = 0; i < taskList.size(); i++){
+                    System.out.println((i+1) + ".[" + taskList.get(i).getStatusIcon()+ "] " + taskList.get(i).getDescription());
                 }
             }
             else if(userInput.equals("bye")){
                 break;
             }
-            else {
-                list.add(userInput);
-                System.out.println("added: " + userInput);
+            else{
+                String[] temp = userInput.split(" ", 2);
+                if(temp[0].equals("done")){
+                    int index = Integer.parseInt(temp[1]) -1;
+                    taskList.get(index).updateFlag();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("[" + taskList.get(index).getStatusIcon()+ "] " + taskList.get(index).getDescription());
+                }
+                else{
+                    Task temporary = new Task(userInput);
+                    taskList.add(temporary);
+                    System.out.println("added: " + userInput);
+                }
             }
         }
 
         System.out.println("Bye, Hope to see you again soon!");
+
     }
+
 
 }
