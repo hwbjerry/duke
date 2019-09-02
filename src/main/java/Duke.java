@@ -47,7 +47,7 @@ public class Duke {
                                 String taskOut = userInput.replaceFirst("todo", "");//todo| |read book spilt to three parts
                                 taskOut = taskOut.trim();
                                 if (taskOut.isEmpty()) {
-                                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                                    throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
                                 }
                                 taskList.add(new Todo(taskOut));
                                 System.out.println("Got it. I've added this task:");
@@ -57,7 +57,7 @@ public class Duke {
 
                             } catch (DukeException e) {
                                 //catch exception
-                                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                                System.out.println("\u2639 OOPS!!! The description of a todo cannot be empty.");
                                 System.out.println("Please enter another task!");
                                 continue;
                             }
@@ -66,7 +66,7 @@ public class Duke {
                                 String taskOut = userInput.replaceFirst("deadline", "");
                                 taskOut = taskOut.trim();
                                 if (taskOut.isEmpty()) {
-                                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                                    throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
                                 }
                                 String[] by = taskOut.split(" /by ", 2);//3. by|sunday
                                 taskList.add(new Deadline(by[0], by[1]));
@@ -111,12 +111,32 @@ public class Duke {
                                     openFile.write(taskList.get(i).getType()+ " | " + taskList.get(i).isDone + " | " + taskList.get(i).description + " | " + taskList.get(i).getWhen() + "\n");
                                 }
                             }
+                        } else if(userInput.startsWith("delete")) {
+                            String[] split = userInput.split(" ", 2);
+                            int index = Integer.parseInt(split[1]) - 1;
+                            if (index < 0 || index >= taskList.size()) {
+                                System.out.println("Invalid number!");
+                            } else {
+
+                                System.out.println("Noted. I've removed this task: \n" +
+                                        taskList.get(index).getStatusIcon() + "\n" +
+                                        "Now you have " + (taskList.size() - 1) + " tasks in the list.");
+
+                                taskList.remove(index);
+
+                                //Write to file
+                                openFile.close();
+                                openFile = new FileWriter("output.txt");
+                                for (int i = 0; i < taskList.size(); i++) {
+                                    openFile.write(taskList.get(i).getType() + " | " + taskList.get(i).isDone + " | " + taskList.get(i).description + " | " + taskList.get(i).getWhen() + "\n");
+                                }
+                            }
                         } else {
-                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
                     }
                 } catch (DukeException exception) {
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                     // continue;
                 }
             }
