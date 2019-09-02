@@ -41,7 +41,8 @@ public class Duke {
                     } else if (userInput.equals("bye")) {
                         System.out.println("Bye. Hope to see you again soon!");
                         break;
-                    } else {
+                    }
+                    else {
                         if (userInput.startsWith("todo")) {
                             try {
                                 String taskOut = userInput.replaceFirst("todo", "");//todo| |read book spilt to three parts
@@ -100,7 +101,8 @@ public class Duke {
                             int index = Integer.parseInt(split[1]) - 1;
                             if (index < 0 || index >= taskList.size()) {
                                 System.out.println("Invalid number!");
-                            } else {
+                            }
+                            else {
                                 taskList.get(index).updateFlag();
                                 System.out.println("  " + taskList.get(index).getStatusIcon());
 
@@ -111,7 +113,27 @@ public class Duke {
                                     openFile.write(taskList.get(i).getType()+ " | " + taskList.get(i).isDone + " | " + taskList.get(i).description + " | " + taskList.get(i).getWhen() + "\n");
                                 }
                             }
-                        } else {
+                        }
+                        else if(userInput.startsWith("delete")){
+                            String[] split = userInput.split(" ", 2);
+                            int index = Integer.parseInt(split[1]) - 1;
+                            if (index < 0 || index >= taskList.size()){
+                                System.out.println("Invalid number!");
+                            }
+                            else{
+
+                                System.out.println("Noted. I've removed this task: \n" +
+                                        "       " + taskList.get(index).getStatusIcon() + taskList.get(index).getWhen() + "\n" +
+                                        "     Now you have " + (taskList.size() - 1) +" tasks in the list.");
+                                taskList.remove(index);
+                                //Write to file
+                                openFile.close();
+                                openFile = new FileWriter("output.txt");
+                                for(int i = 0; i < taskList.size(); i++){
+                                    openFile.write(taskList.get(i).getType()+ " | " + taskList.get(i).isDone + " | " + taskList.get(i).description + " | " + taskList.get(i).getWhen() + "\n");
+                                }
+                            }
+                        }else {
                             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
                     }
