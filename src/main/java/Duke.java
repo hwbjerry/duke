@@ -47,7 +47,7 @@ public class Duke {
                                 String taskOut = userInput.replaceFirst("todo", "");//todo| |read book spilt to three parts
                                 taskOut = taskOut.trim();
                                 if (taskOut.isEmpty()) {
-                                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                                    throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
                                 }
                                 taskList.add(new Todo(taskOut));
                                 System.out.println("Got it. I've added this task:");
@@ -57,7 +57,7 @@ public class Duke {
 
                             } catch (DukeException e) {
                                 //catch exception
-                                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                                System.out.println("\u2639 OOPS!!! The description of a todo cannot be empty.");
                                 System.out.println("Please enter another task!");
                                 continue;
                             }
@@ -66,7 +66,7 @@ public class Duke {
                                 String taskOut = userInput.replaceFirst("deadline", "");
                                 taskOut = taskOut.trim();
                                 if (taskOut.isEmpty()) {
-                                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                                    throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
                                 }
                                 String[] by = taskOut.split(" /by ", 2);//3. by|sunday
                                 taskList.add(new Deadline(by[0], by[1]));
@@ -111,12 +111,31 @@ public class Duke {
                                     openFile.write(taskList.get(i).getType()+ " | " + taskList.get(i).isDone + " | " + taskList.get(i).description + " | " + taskList.get(i).getWhen() + "\n");
                                 }
                             }
-                        } else {
-                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        } else if(userInput.startsWith("find")){
+                            try {
+                                String taskOut = userInput.replaceFirst("find", "");
+                                taskOut = taskOut.trim();
+                                if (taskOut.isEmpty()) {
+                                    throw new DukeException("Please enter another task! In the form: event 'description' /at 'due period'");
+                                }
+                                System.out.println("Here are the matching tasks in your list:");
+                                int count = 1;
+                                for(int i = 0; i < taskList.size(); i++){
+                                    if(taskList.get(i).getDescription().contains(taskOut)){
+                                        System.out.println(count + ". " + taskList.get(i).getStatusIcon());
+                                    }
+                                }
+                            } catch(DukeException exception){
+                                System.out.println("Please find in format. find 'keyword'");
+                                continue;
+                            }
+                        }
+                            else {
+                            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
                     }
                 } catch (DukeException exception) {
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                     // continue;
                 }
             }
