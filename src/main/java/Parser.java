@@ -105,6 +105,26 @@ public class Parser {
                 }
             } else if (userInput.startsWith("delete")) {
                 //next time (branch-level-6)
+                try{
+                    String taskOut = userInput.replaceFirst("delete", "");
+                    taskOut = taskOut.trim();
+                    if (taskOut.isEmpty()) {
+                        System.out.println("Please delete in format. find 'number'");
+                        continue;
+                    } else {
+                        int index = Integer.parseInt(taskOut) - 1;
+                        if (index < 0 || index >= taskList.getSize()) {
+                            System.out.println("Invalid number!");
+                        } else {
+                            ui.deleteMessage(taskList.getTask(index), (taskList.getSize() - 1));
+                            taskList.removeTask(index);
+                        }
+                        //ui.listFindDetails(taskList, taskList.getSize());
+                    }
+
+                }catch (DukeException exception){
+                    throw new DukeException("Please delete in format. delete 'keyword'");
+                }
             } else if (userInput.startsWith("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
             } else {

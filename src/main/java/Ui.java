@@ -50,12 +50,12 @@ public class Ui {
         System.out.println("\t\t" + task);
         showLine();
     }
-    public void deleteMessage(String task, int size) {
+    public void deleteMessage(Task task, int size) {
         showLine();
         System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t\t" + task);
+        System.out.println("\t\t" + task.getStatusIcon());
 //        if (size > 1) {
-            System.out.println("\tNow you have " + size + " tasks in your list.");
+        System.out.println("\tNow you have " + size + " tasks in your list.");
 //        } else {
 //            System.out.println("\tNow you have " + size + " task in the list.");
 //        }
