@@ -10,7 +10,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    static ArrayList<Task> arrList = new ArrayList<Task>();
+    static ArrayList<Task> arrList = new ArrayList<Task>(); //A-Collections
 
     public Duke() {
         ui = new Ui();
