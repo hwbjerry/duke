@@ -1,4 +1,5 @@
 //A-Classes
+//A-JavaDoc
 
 /**
  * Task class that changes the symbol (tick and cross) when the task is

@@ -1,4 +1,5 @@
 //A-Inheritance
+//A-JavaDoc
 
 /**
  * Event class that extends from Task class. Contains the description, date and time and type of the task.

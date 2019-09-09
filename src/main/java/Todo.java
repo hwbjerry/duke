@@ -1,4 +1,5 @@
 //A-Inheritance
+//A-JavaDoc
 
 /**
  * Todo class that extends from Task class. Contains the description and type of the task.
