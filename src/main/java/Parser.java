@@ -1,17 +1,35 @@
 //A-MoorOOP
 
-public class Parser {
-    //protected String userInput;
-    private TaskList taskList; //= new TaskList();
-    private Ui ui; //= new Ui();
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+/**
+ * Parser class that deals with making sense of the  user's input
+ */
+public class Parser {
+    private TaskList taskList;
+    private Ui ui;
+
+    /**
+     * Constructor to initialize the ui and taskList
+     * @param ui ui Class
+     * @param taskList taskList class
+     */
     public Parser(Ui ui, TaskList taskList) {
-        //this.userInput = userInput;
-        //decode(userInput);
         this.taskList = taskList;
         this.ui = ui;
     }
 
+    /**
+     * This method of parse will run the program base on the user's command (ie add to
+     * list when it is deadline, events... while done will mark the task as done and
+     * delete will remove the task from the list.
+     *
+     * @param userInput the user's input.
+     * @throws DukeException If user's input does not have description and when the
+     * user enters invalid inputs.
+     */
     public void decode(String userInput) throws DukeException {
 
         while(!userInput.equals("bye")) {
@@ -42,9 +60,15 @@ public class Parser {
                         throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
                     }
                     String[] by = taskOut.split(" /by ", 2);//3. by|sunday
+
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                    Date date = format.parse(by[1].trim());
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy hh:mma");
+                    by[1] = dateFormat.format(date);
+
                     taskList.addTask(new Deadline(by[0], by[1]));
                     ui.addedTaskMessage(taskList.getTask(taskList.getSize() - 1).getStatusIcon(), taskList.getSize());
-                } catch (DukeException exception) {
+                } catch (ParseException | DukeException exception) {
                     System.out.println("Please enter another task! in the form: deadline 'description' /by 'due period'");
                 }
             } else if (userInput.startsWith("event")) {
@@ -55,14 +79,20 @@ public class Parser {
                         throw new DukeException("Please enter another task! In the form: event 'description' /at 'due period'");
                     }
                     String[] at = taskOut.split(" /at ", 2);
+
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                    Date date = format.parse(at[1].trim());
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy hh:mma");
+                    at[1] = dateFormat.format(date);
+
                     taskList.addTask(new Event(at[0], at[1]));
                     ui.addedTaskMessage(taskList.getTask(taskList.getSize() - 1).getStatusIcon(), taskList.getSize());
                     //                System.out.println("Got it. I've added this task:");
                     //                System.out.println("  " + taskList.getTask(taskList.getSize() - 1).getStatusIcon());
                     //                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                     //                openFile.write("E | 0 | " + at[0] + " | " + at[1] + "\n");
-                } catch (DukeException exception) {
-                    System.out.println("Please enter another task! In the form: event 'description' /at 'due period'");
+                } catch (ParseException | DukeException exception) {
+                    System.out.println("Please enter another task! In the form: event 'description' /at 'dd/MM/yyyy HHmm'");
                 }
             } else if (userInput.startsWith("done")) {
                 String[] split = userInput.split(" ", 2);
@@ -85,7 +115,7 @@ public class Parser {
                     String taskOut = userInput.replaceFirst("find", "");
                     taskOut = taskOut.trim();
                     if (taskOut.isEmpty()) {
-                        throw new DukeException("Please enter another task! In the form: event 'description' /at 'due period'");
+                        throw new DukeException("Please enter another task! In the form: event 'description' /at 'dd/MM/yyyy HHmm'");
                     }
                     ui.listFindDetailsWithKeyword(taskList, taskOut, taskList.getSize());
                 } catch (DukeException exception) {
