@@ -3,4 +3,5 @@ deadline read /by 01/12/2019 0005
 event readmark /at 05/12/2018 1215
 list
 find
+find l
 bye
