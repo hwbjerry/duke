@@ -1,0 +1,39 @@
+Hello from
+ ____        _
+|  _ \ _   _| | _____
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+	____________________________________________________________
+	Hello! I'm Duke
+	What can I do for you?
+	____________________________________________________________
+todo readbook
+	____________________________________________________________
+	Got it. I've added this task:
+		[T][✘] readbook
+	Now you have 1 tasks in your list.
+	____________________________________________________________
+deadline read /by 01/12/2019 0005
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][✘] read(by: 01 December 2019 12:05AM)
+	Now you have 2 tasks in your list.
+	____________________________________________________________
+event readmark /at 05/12/2018 1215
+	____________________________________________________________
+	Got it. I've added this task:
+		[E][✘] readmark(at: 05 December 2018 12:15PM)
+	Now you have 3 tasks in your list.
+	____________________________________________________________
+list
+	____________________________________________________________
+Here are the matching tasks in your list:
+1. [T][✘] readbook
+2. [D][✘] read(by: 01 December 2019 12:05AM)
+3. [E][✘] readmark(at: 05 December 2018 12:15PM)
+find
+Please find in format. find 'keyword'
+bye
+Bye. Hope to see you again soon!
