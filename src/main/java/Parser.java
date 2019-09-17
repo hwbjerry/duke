@@ -12,6 +12,8 @@ public class Parser {
     private TaskList taskList;
     private Ui ui;
 
+
+
     /**
      * Constructor to initialize the ui and taskList
      * @param ui ui Class

@@ -11,6 +11,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
+
     protected Scanner scan = new Scanner(System.in);
 
     /**
